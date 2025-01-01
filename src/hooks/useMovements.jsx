@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { useDb } from "./useDb";
+import { getDb } from "../db";
 
 const defaultMovementsContextValue = {
   movements: [],
@@ -15,7 +15,7 @@ const MovementsContext = createContext(defaultMovementsContextValue);
 export const useMovements = () => useContext(MovementsContext);
 
 export const MovementsProvider = ({ children }) => {
-  const db = useDb();
+  const [db, setDb] = useState(null);
   const [movements, setMovements] = useState([]);
 
   useEffect(() => {
@@ -28,6 +28,12 @@ export const MovementsProvider = ({ children }) => {
       setMovements(result);
     };
     if (db) fetchMovements();
+
+    const fetchDb = async () => {
+      const db = await getDb();
+      setDb(db);
+    };
+    if (!db) fetchDb();
   }, [db]);
 
   async function addMovement(name, weight, date) {

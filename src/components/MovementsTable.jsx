@@ -1,6 +1,7 @@
 import { useMovements } from "../hooks/useMovements";
-import DeleteMovementButton from "./DeleteMovementButton";
 import MovementsAddModalDialog from "./MovementsAddModalDialog";
+import { Link } from "react-router-dom";
+import { urlize } from "../utils";
 
 const MovementsTable = () => {
   const { movements } = useMovements();
@@ -25,32 +26,47 @@ const MovementsTable = () => {
     twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
     return new Date(date) > twoWeeksAgo;
   };
+  function sortByDate(a, b) {
+    return new Date(b.date) - new Date(a.date);
+  }
+  const formatDate = date => {
+    const options = {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    };
+    return new Date(date).toLocaleDateString(undefined, options);
+  };
+
   return (
     <table>
       <thead>
         <tr>
-          <th>Actions</th>
-          <th>Name</th>
-          <th>Weight</th>
           <th>Date</th>
-          <th>Is Recent</th>
+          <th>Weight</th>
+          <th>Name</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
-        {maxWeightMovements.map(movement => (
-          <tr key={movement.id}>
+        {maxWeightMovements.sort(sortByDate).map(movement => (
+          <tr
+            key={movement.id}
+            style={{ color: isRecent(movement.date) ? "black" : "gray" }}
+          >
+            <td>{formatDate(movement.date)}</td>
+            <td>{movement.weight}</td>
+            <td>
+              <Link to={`/${urlize(movement.name)}`}>{movement.name}</Link>
+            </td>
             <td>
               <MovementsAddModalDialog
                 name={movement.name}
                 weight={movement.weight}
                 date={movement.date}
               />
-              <DeleteMovementButton id={movement.id} />
             </td>
-            <td>{movement.name}</td>
-            <td>{movement.weight}</td>
-            <td>{movement.date}</td>
-            <td>{isRecent(movement.date) ? "T" : "F"}</td>
           </tr>
         ))}
       </tbody>

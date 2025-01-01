@@ -1,15 +1,28 @@
 import { useState, useRef } from "react";
+import PropTypes from "prop-types";
 import { useMovements } from "../hooks/useMovements";
 
-const MovementsAddModalDialog = props => {
-  const [name, setName] = useState(props.name);
-  const [weight, setWeight] = useState(props.weight);
-  const [date, setDate] = useState(props.date);
+const MovementsAddModalDialog = ({
+  name: initialName = "",
+  weight: initialWeight = 0,
+  date: initialDate = "",
+  text = "+",
+  nameLabel = "New Movement",
+}) => {
+  const [name, setName] = useState(initialName);
+  const [weight, setWeight] = useState(initialWeight);
+  const [date, setDate] = useState(initialDate);
   const { addMovement } = useMovements();
   const dialogRef = useRef(null);
+  const weightInputRef = useRef(null);
 
   const handleClose = () => dialogRef.current.close();
-  const handleShow = () => dialogRef.current.showModal();
+  const handleShow = () => {
+    dialogRef.current.showModal();
+    if (initialName && initialWeight) {
+      weightInputRef.current.focus();
+    }
+  };
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -26,11 +39,11 @@ const MovementsAddModalDialog = props => {
 
   return (
     <>
-      <button onClick={handleShow}>{props.text || "+"}</button>
+      <button onClick={handleShow}>{text}</button>
 
       <dialog ref={dialogRef}>
         <form onSubmit={handleSubmit}>
-          <h2>Add {props.name || "New Movement"}</h2>
+          <h2>Add {nameLabel}</h2>
           <div className="form-group">
             <label htmlFor="formName">Name</label>
             <input
@@ -50,6 +63,7 @@ const MovementsAddModalDialog = props => {
               id="formWeight"
               placeholder="Enter weight"
               value={weight}
+              ref={weightInputRef}
               onChange={e => setWeight(e.target.value)}
               required
             />
@@ -74,6 +88,13 @@ const MovementsAddModalDialog = props => {
       </dialog>
     </>
   );
+};
+MovementsAddModalDialog.propTypes = {
+  name: PropTypes.string,
+  weight: PropTypes.number,
+  date: PropTypes.string,
+  text: PropTypes.string,
+  nameLabel: PropTypes.string,
 };
 
 export default MovementsAddModalDialog;

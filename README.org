@@ -1,0 +1,24 @@
+#+TITLE: Fitness Tracker
+#+AUTHOR: abstractionjackson
+
+* Overview
+A browser-based dashboard that tracks weight-training performance, with a focus on Personal Record Weights.
+* Data
+** Movements
+#+BEGIN_SRC sql
+CREATE TABLE IF NOT EXISTS movements(
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          name NOT NULL,
+          weight FLOAT NOT NULL,
+          date DATE DEFAULT CURRENT_DATE
+        );
+#+END_SRC
+The movements table tracks individual weight-lifting performances by date, weight, and name. For instance, a row may contain "2024-01-23", 405, and "Deadlift".
+- Support for aliases is *in development*. For instance, "Squat" maps to "High-Bar Back Squat", "Military Press" -> "Barbell Strict Press"
+- Also *in development*, movement types ("dumbbell", "barbell", "machine", "kettlebell", etc.)
+* Features
+** Movements
+- View a list of Personal Records in a given movement
+- Add new Records to a given movement
+- Add new movements
+- *in development* View a list of all Records for a given movement, including a chart of progress.

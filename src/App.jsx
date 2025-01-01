@@ -7,11 +7,17 @@ function App() {
     <>
       <h1>Fitness Tracker</h1>
       <section>
-        <header>
-          <h2>Movements</h2>
+        <header
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            margin: "auto",
+          }}
+        >
+          <h2>Movements by Date and Max Weight</h2>
+          <MovementsAddModalDialog text={"New"} />
         </header>
         <main>
-          <MovementsAddModalDialog text={"New Movement"} />
           <MovementsTable />
         </main>
       </section>

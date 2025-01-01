@@ -11,7 +11,7 @@ const DeleteMovementButton = ({ id }) => {
   return <button onClick={handleDelete}>Delete</button>;
 };
 DeleteMovementButton.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default DeleteMovementButton;
