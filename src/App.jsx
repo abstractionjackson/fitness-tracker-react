@@ -35,7 +35,7 @@ function App() {
         </section>
       </main>
       <footer style={{ marginTop: "auto" }}>
-        Copyright 2025 abstractionjackson
+        <small>© 2025 abstractionjackson</small>
       </footer>
     </div>
   );
