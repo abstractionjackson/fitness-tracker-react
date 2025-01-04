@@ -22,3 +22,7 @@ The movements table tracks individual weight-lifting performances by date, weigh
 - Add new Records to a given movement
 - Add new movements
 - *in development* View a list of all Records for a given movement, including a chart of progress.
+* Technologies
+- React
+- Sqlite (via Sqlite WASM)
+- React Router

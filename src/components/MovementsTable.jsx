@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import { urlize } from "../utils";
 
 const MovementsTable = () => {
+  // type Movement = { name, barbell_weight, dumbell_weight, machine_weight, date }
   const { movements } = useMovements();
   const maxWeightMovements = movements.reduce((acc, movement) => {
-    const existingMovement = acc.find(m => m.name === movement.name);
+    const key = `${movement.name}-${movement.type}`;
+    const existingMovement = acc.find(m => `${m.name}-${m.type}` === key);
     if (!existingMovement || movement.weight > existingMovement.weight) {
-      return acc.filter(m => m.name !== movement.name).concat(movement);
+      return acc.filter(m => `${m.name}-${m.type}` !== key).concat(movement);
     }
     return acc;
   }, []);

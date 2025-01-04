@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import { useMovements } from "../hooks/useMovements";
+import { Button } from "react-bootstrap";
 
 const MovementsAddModalDialog = ({
   name: initialName = "",
@@ -26,8 +27,20 @@ const MovementsAddModalDialog = ({
 
   const handleSubmit = async e => {
     e.preventDefault();
+    const [year, month, day] = date.split("-");
+    // new Date
+    const isoDate = `${year}-${month}-${day}T00:00:00.000Z`;
+    // timezone offset
+    const tzOffset = new Date().getTimezoneOffset();
+    console.log(tzOffset);
+    // offsetdate
+    const offsetDate = new Date(isoDate);
+    // offsetdate
+    offsetDate.setMinutes(offsetDate.getMinutes() + tzOffset);
+    console.log(offsetDate.toISOString());
+
     try {
-      await addMovement(name, weight, date);
+      await addMovement(name, weight, offsetDate.toISOString());
       setName("");
       setWeight("");
       setDate("");
@@ -39,7 +52,13 @@ const MovementsAddModalDialog = ({
 
   return (
     <>
-      <button onClick={handleShow}>{text}</button>
+      <Button
+        variant="primary"
+        onClick={handleShow}
+        style={{ margin: "auto", height: "min-content", marginLeft: "1rem" }}
+      >
+        {text}
+      </Button>
 
       <dialog ref={dialogRef}>
         <form onSubmit={handleSubmit}>
