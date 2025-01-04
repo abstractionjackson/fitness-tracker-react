@@ -41,7 +41,9 @@ const MovementsTable = () => {
     return new Date(date).toLocaleDateString(undefined, options);
   };
 
-  return (
+  return maxWeightMovements.length < 1 ? (
+    <p>⛺️ No Movements, Yet...</p>
+  ) : (
     <table>
       <thead>
         <tr>

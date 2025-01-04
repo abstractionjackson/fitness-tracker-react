@@ -11,7 +11,7 @@ function App() {
   return (
     <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
       <header>
-        <h1>🏋🏻‍♂️Personal Records</h1>
+        <h1>🏋🏻‍♂️ Personal Records</h1>
         <p>
           Track your best lifts by movement. Click <i>New</i> to add a movement,
           or select an existing movement to view your lifts by date.{" "}
