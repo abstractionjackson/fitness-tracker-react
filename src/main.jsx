@@ -12,7 +12,7 @@ import MovementDetailPage from "./containers/MovementDetailPage.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <MovementsProvider>
-      <Router>
+      <Router basename="/fitness-tracker-react">
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/:movement" element={<MovementDetailPage />} />
