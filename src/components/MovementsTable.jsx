@@ -2,6 +2,7 @@ import { useMovements } from "../hooks/useMovements";
 import MovementsAddModalDialog from "./MovementsAddModalDialog";
 import { Link } from "react-router-dom";
 import { urlize } from "../utils";
+import Table from "react-bootstrap/Table";
 
 const MovementsTable = () => {
   // type Movement = { name, barbell_weight, dumbell_weight, machine_weight, date }
@@ -42,9 +43,9 @@ const MovementsTable = () => {
   };
 
   return maxWeightMovements.length < 1 ? (
-    <p>Add a Mvoement to Get Started! 🏃🏻‍♂️</p>
+    <p>Add a Movement to Get Started! 🏃🏻‍♂️</p>
   ) : (
-    <table>
+    <Table striped bordered hover>
       <thead>
         <tr>
           <th>Date</th>
@@ -74,7 +75,7 @@ const MovementsTable = () => {
           </tr>
         ))}
       </tbody>
-    </table>
+    </Table>
   );
 };
 

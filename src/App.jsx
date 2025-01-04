@@ -26,7 +26,9 @@ function App() {
               margin: "auto",
             }}
           >
-            <h2>Movements by Date and Max Weight</h2>
+            <h2 style={{ marginBottom: "2rem" }}>
+              Movements by Date and Max Weight
+            </h2>
             <MovementsAddModalDialog text={"New"} />
           </header>
           <main>

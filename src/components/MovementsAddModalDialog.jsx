@@ -42,7 +42,11 @@ const MovementsAddModalDialog = ({
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button
+        variant="primary"
+        onClick={handleShow}
+        style={{ height: "min-content" }}
+      >
         {text}
       </Button>
 
