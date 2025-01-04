@@ -42,7 +42,7 @@ const MovementsTable = () => {
   };
 
   return maxWeightMovements.length < 1 ? (
-    <p>⛺️ No Movements, Yet...</p>
+    <p>Add a Mvoement to Get Started! 🏃🏻‍♂️</p>
   ) : (
     <table>
       <thead>
