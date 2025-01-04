@@ -17,7 +17,7 @@ export const initDb = async () => {
         CREATE TABLE IF NOT EXISTS movements(
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           name NOT NULL,
-          weight FLOAT NOT NULL,
+          weight REAL NOT NULL,
           date DATE DEFAULT CURRENT_DATE
         );
         `);
